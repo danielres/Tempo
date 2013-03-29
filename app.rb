@@ -18,6 +18,7 @@ class Activity
   property :deleted,        Integer
   property :category_id,    Integer
   property :search_name,    String
+  belongs_to :category
 end
 
 class Category
@@ -27,6 +28,7 @@ class Category
   property :color_code,     String
   property :category_order, Integer
   property :search_name,    String
+  has n, :activities
 end
 
 class Fact
