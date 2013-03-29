@@ -6,4 +6,5 @@ describe Tag do
     Tag.all.should have(3).items
   end
 
+
 end
