@@ -1,10 +1,9 @@
-require "./app"
+require_relative './spec_helper'
 
 describe Tag do
 
   it "should show the list of tags" do
     Tag.all.should have(3).items
   end
-
 
 end
