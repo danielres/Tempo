@@ -5,5 +5,6 @@ Simplest possible sinatra app to generate reports/invoices from the hamster time
 
 Links:
 
-* [sinatra ruby framework](http://www.sinatrarb.com/)
-* [hamster time tracking](http://projecthamster.wordpress.com/)
+* [Tempo public project on Pivotal Tracker](https://www.pivotaltracker.com/projects/792971)
+* [Sinatra ruby framework](http://www.sinatrarb.com/)
+* [Hamster time tracker](http://projecthamster.wordpress.com/)
