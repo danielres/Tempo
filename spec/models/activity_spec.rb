@@ -15,4 +15,12 @@ describe Activity do
     activity.category.should == category
   end
 
+  it "has many facts" do
+    fact1               = Fact.new
+    fact2               = Fact.new
+    facts               = [ fact1, fact2 ]
+    activity_with_facts = activity.tap{ |c| c.facts = facts }
+    activity_with_facts.facts.should == [ fact1, fact2 ]
+  end
+
 end

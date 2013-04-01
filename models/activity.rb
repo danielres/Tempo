@@ -8,4 +8,5 @@ class Activity
   property :category_id,    Integer
   property :search_name,    String
   belongs_to :category
+  has n, :facts
 end
