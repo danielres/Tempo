@@ -4,4 +4,5 @@ class Fact
   property :start_time,     DateTime
   property :end_time,       DateTime
   property :description,    String
+  belongs_to :activity
 end
