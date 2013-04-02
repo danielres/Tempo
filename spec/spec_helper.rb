@@ -9,3 +9,7 @@ def app
   Sinatra::Application
 end
 Capybara.app = app
+
+def extract_words_from comma_separated_words
+  comma_separated_words.split(',').map(&:strip)
+end
