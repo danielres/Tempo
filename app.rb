@@ -9,5 +9,29 @@ DataMapper.finalize
 get '/' do
   "<h1>Tempo</h1>" +
   "<h2>Dashboard</h2>" +
-  Activity.all.map(&:name).join(',')
+  make_links(activities)
 end
+
+get '/activity/:id' do
+  "Timesheet for #{activity.name}"
+end
+
+
+private
+
+  def activity
+    Activity.get params[:id]
+  end
+
+  def activities
+    Activity.all
+  end
+
+  def make_links objects
+    objects.map do |o|
+      link_text = o.name
+      link_href = "/#{o.class.to_s.downcase}/#{o.id}"
+      "<a href='#{link_href}'>#{link_text}</a>"
+    end.join(' ')
+
+  end
