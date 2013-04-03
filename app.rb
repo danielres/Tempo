@@ -13,7 +13,15 @@ get '/' do
 end
 
 get '/activity/:id' do
-  "Timesheet for #{activity.name}"
+  text = ""
+  text << "<h1>Timesheets for #{activity.name}</h1>"
+  activity_months(activity).each do |month|
+   text << "<div class='timesheet'>
+              <h2>Timesheet for #{month.year}-#{month.month}</h2>
+              #{ Timesheet.new( activity, month ) }
+            </div>"
+  end
+  text
 end
 
 
@@ -33,5 +41,14 @@ private
       link_href = "/#{o.class.to_s.downcase}/#{o.id}"
       "<a href='#{link_href}'>#{link_text}</a>"
     end.join(' ')
+  end
 
+  def timesheets_for activity
+    activity_months.map do |month|
+      Timesheet.new activity, month
+    end
+  end
+
+  def activity_months activity
+    activity.months
   end

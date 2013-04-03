@@ -9,4 +9,14 @@ class Activity
   property :search_name,    String
   belongs_to :category
   has n, :facts
+
+  def months
+    facts.map{ |f| f.start_time.strftime('%Y-%m') }
+         .uniq
+         .map{ |year_month|
+            year, month = year_month.split('-').map(&:to_i)
+            DateTime.new(year, month)
+          }
+  end
+
 end
