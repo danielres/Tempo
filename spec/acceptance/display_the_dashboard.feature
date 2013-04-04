@@ -1,3 +1,4 @@
+@dashboard
 Feature: Dashboard
 
   Scenario: Displaying the dashboard

@@ -1,6 +1,6 @@
 
 
-# module DashboardSteps
+steps_for :dashboard do
 
   step "activities: :word_list" do |word_list|
     activity_names = extract_words_from word_list
@@ -26,4 +26,4 @@
     end
   end
 
-# end
+end
