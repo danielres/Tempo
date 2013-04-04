@@ -1,4 +1,4 @@
-Feature: Display the dashboard
+Feature: Dashboard
 
   Scenario: Displaying the dashboard
     Given activities: "work, play, sleep"
