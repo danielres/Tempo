@@ -1,6 +1,4 @@
-
-
-# module ActivitySteps
+steps_for :display_an_activity do
 
   step "an activity :name that was practiced during :num_months months" do |name, num_months|
     @activity = Activity.new id: 1, name: name
@@ -22,4 +20,4 @@
     puts page.all(".timesheet").map{ |ts| ts.text }.join("\n")
   end
 
-# end
+end

@@ -1,3 +1,4 @@
+@display_an_activity
 Feature: Display an activity
 
   Scenario: Displaying the activity timesheets
