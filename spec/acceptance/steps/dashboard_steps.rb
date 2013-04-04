@@ -15,14 +15,12 @@ steps_for :dashboard do
     visit main_page_path
   end
 
-  step "I should see the dashboard" do
-    page.should have_content 'Dashboard'
-  end
-
-  step 'I should see links to the activities: :word_list' do |word_list|
-    activity_names = extract_words_from word_list
-    activity_names.each do |activity_name|
-      page.should have_css  'a', text: activity_name
+  step 'I should see the dashboard with links to the activities: :word_list' do |word_list|
+    within the 'dashboard' do
+      activity_names = extract_words_from word_list
+      activity_names.each do |activity_name|
+        page.should have_css  'a', text: activity_name
+      end
     end
   end
 

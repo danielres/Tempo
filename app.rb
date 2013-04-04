@@ -7,9 +7,11 @@ DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/hamster.db")
 DataMapper.finalize
 
 get '/' do
-  "<h1>Tempo</h1>" +
-  "<h2>Dashboard</h2>" +
-  make_links(activities)
+  "<h1>Tempo</h1>"                 +
+  '<div data-purpose="dashboard">' +
+  "<h2>Dashboard</h2>"             +
+  make_links(activities)           +
+  '</div>'
 end
 
 get '/activity/:id' do

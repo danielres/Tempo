@@ -22,3 +22,7 @@ end
 def activity_path activity
   "/activity/#{activity.id}"
 end
+
+def the purpose_name
+  "[data-purpose=#{purpose_name}]"
+end
