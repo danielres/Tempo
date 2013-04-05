@@ -1,20 +1,29 @@
 require_relative '../spec_helper'
+require_relative '../../models/category'
+
 
 describe Category do
 
   let(:category) { Category.new }
 
-  it "has proper attributes" do
-    attributes  = [ :id, :name, :color_code, :category_order, :search_name ]
-    attributes.each{ |attribute| category.should respond_to attribute }
+  describe '#new' do
+    it "has proper attributes" do
+      attributes  = %w( id name color_code category_order search_name )
+      attributes.each{ |attribute| category.should respond_to attribute }
+    end
   end
 
-  it "has many activities" do
-    activity1                = Activity.new
-    activity2                = Activity.new
-    activities               = [ activity1, activity2 ]
-    category_with_activities = category.tap{ |c| c.activities = activities }
-    category_with_activities.activities.should == [ activity1, activity2 ]
+  describe '#activities' do
+    class Activity < DummyModel; end
+    let( :activity1  ){ Activity.new }
+    let( :activity2  ){ Activity.new }
+    let( :activities ){ [ activity1, activity2 ] }
+    let( :category_with_activities ){ Category.new.tap{ |c| c.activities = activities } }
+    it "has many activities" do
+      activities.count.times do |i|
+        category_with_activities.activities.sort[i].should equal activities.sort[i]
+      end
+    end
   end
 
 end
