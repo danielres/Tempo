@@ -1,26 +1,30 @@
 require_relative '../spec_helper'
+require_relative '../../models/timesheet'
 
 describe Timesheet do
 
-
   describe '#new' do
-    let( :timesheet       ) { Timesheet.new activity, requested_month }
-    let( :activity        ) { Activity.new                            }
-    let( :requested_month ) { DateTime.new                            }
+    before { stub_const 'Activity', DummyModel }
+    let( :timesheet ){ Timesheet.new activity, month }
+    let( :activity  ){ Activity.new }
+    let( :month     ){ DateTime.new 2013,01 }
     it "creates a new timesheet given an activity and a month" do
-      timesheet = Timesheet.new activity, requested_month
+      Timesheet.new activity, month
     end
   end
 
   describe '#facts' do
-    let( :timesheet       ) { Timesheet.new activity, requested_month                       }
-    let( :activity        ) { Activity.new facts: [ before_fact, fact1, fact2, after_fact ] }
-    let( :before_fact     ) { Fact.new start_time: requested_month.prev_month               }
-    let( :fact1           ) { Fact.new start_time: requested_month                          }
-    let( :fact2           ) { Fact.new start_time: requested_month.next_day                 }
-    let( :after_fact      ) { Fact.new start_time: requested_month.next_month               }
-    let( :requested_month ) { DateTime.new 2013, 01                                         }
-    it "returns only facts included in the requested month" do
+    before { stub_const 'Activity', DummyModel }
+    before { stub_const 'Fact',     DummyModel }
+    let( :activity_with_facts  ){ a=Activity.new.tap{ |a| a.stub facts: facts } }
+    let( :month          ){ DateTime.new 2013, 01 }
+    let( :timesheet      ){ Timesheet.new activity_with_facts, month }
+    let( :fact1          ){ Fact.new.tap{ |f| f.stub start_time: month} }
+    let( :fact2          ){ Fact.new.tap{ |f| f.stub start_time: month.next_day } }
+    let( :earlyer_fact   ){ Fact.new.tap{ |f| f.stub start_time: month.prev_month } }
+    let( :later_fact     ){ Fact.new.tap{ |f| f.stub start_time: month.next_month } }
+    let( :facts          ){ [ earlyer_fact, fact1, fact2, later_fact ] }
+    it "returns only the facts that happened in a precise month" do
       timesheet.facts.should =~ [ fact1, fact2 ]
     end
   end

@@ -14,7 +14,7 @@ describe Activity do
   end
 
   describe '#category' do
-    class Category < DummyModel; end
+    before { stub_const 'Category', DummyModel }
     let( :category ){ Category.new }
     let( :activity ){ Activity.new.tap{ |a| a.category = category } }
     it "belongs to a category" do
@@ -23,7 +23,7 @@ describe Activity do
   end
 
   describe '#facts' do
-    class Fact < DummyModel; end
+    before { stub_const 'Fact', DummyModel }
     let( :fact1               ){ Fact.new }
     let( :fact2               ){ Fact.new }
     let( :facts               ){ [ fact1, fact2 ] }
@@ -36,7 +36,7 @@ describe Activity do
   end
 
   describe '#months' do
-    class Fact < DummyModel; end
+    before { stub_const 'Fact', DummyModel }
     it "returns a list of months when the activity occurs" do
       month1  = DateTime.new( 2012, 1 )
       month2  = DateTime.new( 2013, 1 )

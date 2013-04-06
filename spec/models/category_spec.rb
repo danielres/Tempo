@@ -14,7 +14,7 @@ describe Category do
   end
 
   describe '#activities' do
-    class Activity < DummyModel; end
+    before { stub_const 'Activity', DummyModel }
     let( :activity1  ){ Activity.new }
     let( :activity2  ){ Activity.new }
     let( :activities ){ [ activity1, activity2 ] }
