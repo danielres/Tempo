@@ -45,11 +45,11 @@ private
     end.join(' ')
   end
 
-  def timesheets_for activity
-    activity_months.map do |month|
-      Timesheet.new activity, month
-    end
-  end
+  # def timesheets_for activity
+  #   activity_months.map do |month|
+  #     Timesheet.new activity, month
+  #   end
+  # end
 
   def activity_months activity
     activity.months
