@@ -22,4 +22,14 @@ describe Fact do
     end
   end
 
+  describe '#duration' do
+    start_time = Time.new 2013,1,1,1,0
+    duration   = 10*60 # 10 minutes
+    end_time   = start_time + duration
+    before { fact.stub( start_time: start_time, end_time: end_time  ) }
+    it "returns its duration in minutes" do
+      fact.duration.should == 10
+    end
+  end
+
 end
