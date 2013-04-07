@@ -13,7 +13,7 @@ describe Timesheet do
     end
   end
 
-  describe '#facts' do
+  describe 'with facts' do
     before { stub_const 'Activity', DummyModel }
     before { stub_const 'Fact',     DummyModel }
     let( :activity_with_facts  ){ a=Activity.new.tap{ |a| a.stub facts: facts } }
@@ -24,9 +24,22 @@ describe Timesheet do
     let( :earlyer_fact   ){ Fact.new.tap{ |f| f.stub start_time: month.prev_month } }
     let( :later_fact     ){ Fact.new.tap{ |f| f.stub start_time: month.next_month } }
     let( :facts          ){ [ earlyer_fact, fact1, fact2, later_fact ] }
-    it "returns only the facts that happened in a precise month" do
-      timesheet.facts.should =~ [ fact1, fact2 ]
+
+    describe '#facts' do
+      it "returns only the facts that happened in a precise month" do
+        timesheet.facts.should =~ [ fact1, fact2 ]
+      end
     end
+
+    describe '#total_minutes_count' do
+      before { fact1.stub duration: 10 }
+      before { fact2.stub duration: 20 }
+      it "returns the total minutes count of the facts" do
+        timesheet.total_minutes_count.should == 30
+      end
+    end
+
   end
+
 
 end
