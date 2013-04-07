@@ -18,7 +18,7 @@ get '/activity/:id' do
   text = ""
   text << "<h1>Timesheets for #{activity.name}</h1>"
   activity_months(activity).each do |month|
-   text << "<div class='timesheet'>
+   text << "<div data-purpose='timesheet'>
               <h2>Timesheet for #{month.year}-#{month.month}</h2>
               #{ Timesheet.new( activity, month ) }
             </div>"

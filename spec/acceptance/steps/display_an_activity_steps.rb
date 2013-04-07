@@ -16,8 +16,7 @@ steps_for :display_an_activity do
   end
 
   step "I should see :count timesheets" do |count|
-    page.should have_css '.timesheet', count: count
-    puts page.all(".timesheet").map{ |ts| ts.text }.join("\n")
+    page.should have_css the('timesheet'), count: count
   end
 
 end
