@@ -46,6 +46,17 @@ describe Timesheet do
       end
     end
 
+    describe '#month' do
+      it 'returns the month of the timesheet period as simple number' do
+        timesheet.month.should == 1
+      end
+    end
+
+    describe '#year' do
+      it 'returns the year of the timesheet period as a simple number' do
+        timesheet.year.should == 2013
+      end
+    end
   end
 
 

@@ -20,4 +20,12 @@ class Timesheet
      sprintf( "%.1f", Float( total_minutes_count ) / 60 ).to_f
   end
 
+  def month
+    @month.month
+  end
+
+  def year
+    @month.year
+  end
+
 end
