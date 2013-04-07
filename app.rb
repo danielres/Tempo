@@ -18,10 +18,7 @@ get '/activity/:id' do
   text = ""
   text << "<h1>Timesheets for #{activity.name}</h1>"
   activity_months(activity).each do |month|
-   text << "<div data-purpose='timesheet'>
-              <h2>Timesheet for #{month.year}-#{month.month}</h2>
-              #{ Timesheet.new( activity, month ) }
-            </div>"
+   text << exhibit_timesheet( Timesheet.new( activity, month ) )
   end
   text
 end
@@ -53,4 +50,37 @@ private
 
   def activity_months activity
     activity.months
+  end
+
+  def exhibit_timesheet timesheet
+    html = ''
+    timesheet.facts.each {|fact| html << exhibit_fact(fact) }
+    "<div data-purpose='timesheet'>
+     <h2>Timesheet</h2>
+     #{html}
+     <div data-purpose='total_minutes_count'>#{timesheet.total_minutes_count}</div>
+     </div>"
+  end
+
+  def exhibit_fact fact
+    html = ''
+
+    html << "<span data-purpose='minutes_count'>
+              #{fact_duration fact}
+             </span>"
+    html << "<span data-purpose='description'>
+              #{fact.description}
+             </span>"
+    html << "<span data-purpose='start_time'>
+              #{fact.start_time.hour}:#{fact.start_time.minute}
+             </span>"
+    html << '-'
+    html << "<span data-purpose='end_time'>
+              #{fact.end_time.hour}:#{fact.end_time.minute}
+             </span>"
+    "<div data-purpose='fact'>#{html}</div>"
+  end
+
+  def fact_duration fact
+   ( (fact.end_time.to_time - fact.start_time.to_time) / 60 ).to_i #in minutes
   end
