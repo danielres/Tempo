@@ -77,6 +77,8 @@ GEM
       rspec (~> 2.11)
     json (1.7.7)
     json_pure (1.7.7)
+    launchy (2.1.0)
+      addressable (~> 2.2.6)
     listen (0.7.3)
     lumberjack (1.0.3)
     method_source (0.8.1)
@@ -134,6 +136,7 @@ DEPENDENCIES
   dm-sqlite-adapter
   guard
   guard-rspec
+  launchy
   rb-inotify
   rspec
   sinatra

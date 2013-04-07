@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 gem 'data_mapper'
 gem 'dm-sqlite-adapter'
-gem 'capybara'
 gem 'sinatra'
 
 group :test do
@@ -10,4 +9,6 @@ group :test do
   gem 'turnip'
   gem 'guard'
   gem 'guard-rspec'
+  gem 'capybara'
+  gem 'launchy'
 end
