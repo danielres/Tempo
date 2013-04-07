@@ -42,12 +42,6 @@ private
     end.join(' ')
   end
 
-  # def timesheets_for activity
-  #   activity_months.map do |month|
-  #     Timesheet.new activity, month
-  #   end
-  # end
-
   def activity_months activity
     activity.months
   end
@@ -69,7 +63,7 @@ private
     html = ''
 
     html << "<span data-purpose='minutes_count'>
-              #{fact_duration fact}
+              #{fact.duration}
              </span>"
     html << "<span data-purpose='description'>
               #{fact.description}
@@ -82,8 +76,4 @@ private
               #{fact.end_time.hour}:#{fact.end_time.minute}
              </span>"
     "<div data-purpose='fact'>#{html}</div>"
-  end
-
-  def fact_duration fact
-   ( (fact.end_time.to_time - fact.start_time.to_time) / 60 ).to_i #in minutes
   end
