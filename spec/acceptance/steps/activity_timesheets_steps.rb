@@ -34,7 +34,7 @@ steps_for :display_an_activity do
     @expected = {
       fact1: { minutes_count: 10, description: 'smelling wine' },
       fact2: { minutes_count: 60, description: 'tasting beer'  },
-      total_minutes_count: 70,
+      total_hours_count: 1.2,
       fact_count: 2
     }
   end
@@ -52,7 +52,7 @@ steps_for :display_an_activity do
       page.should have_the('description',   text: "#{@expected[:fact2][:description]}")
     end
     within the 'timesheet' do
-      page.should have_the 'total_minutes_count', text: "#{@expected[:total_minutes_count]}"
+      page.should have_the 'total_hours_count', text: "#{@expected[:total_hours_count]}"
     end
   end
 

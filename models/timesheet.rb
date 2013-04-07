@@ -16,4 +16,8 @@ class Timesheet
     total
   end
 
+  def total_hours_count
+     sprintf( "%.1f", Float( total_minutes_count ) / 60 ).to_f
+  end
+
 end

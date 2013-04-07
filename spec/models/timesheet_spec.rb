@@ -39,6 +39,13 @@ describe Timesheet do
       end
     end
 
+    describe '#total_hours_count' do
+      before { timesheet.stub total_minutes_count: 332 }
+      it "returns the total_hours_count of the facts, rouded to the first decimal" do
+        timesheet.total_hours_count.should == 5.5 # 322 minutes = 5.533 hours
+      end
+    end
+
   end
 
 

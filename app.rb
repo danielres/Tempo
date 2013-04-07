@@ -58,7 +58,10 @@ private
     "<div data-purpose='timesheet'>
      <h2>Timesheet</h2>
      #{html}
-     <div data-purpose='total_minutes_count'>#{timesheet.total_minutes_count}</div>
+       <div class='time_spent'>
+       <span data-purpose='total_hours_count'>#{timesheet.total_hours_count} hours</span>
+       <span data-purpose='total_hours_count'>(#{timesheet.total_minutes_count} minutes)</span>
+       </div>
      </div>"
   end
 
