@@ -50,7 +50,7 @@ private
     html = ''
     timesheet.facts.each {|fact| html << exhibit_fact(fact) }
     "<div data-purpose='timesheet'>
-     <h2>Timesheet</h2>
+     <h2>Timesheet for #{timesheet.year}-#{timesheet.month}</h2>
      #{html}
        <div class='time_spent'>
        <span data-purpose='total_hours_count'>#{timesheet.total_hours_count} hours</span>
