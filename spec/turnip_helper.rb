@@ -26,3 +26,8 @@ end
 def the purpose_name
   "[data-purpose=#{purpose_name}]"
 end
+
+def have_the *args, &block
+  args[0] = the args[0]
+  have_css *args, &block
+end
