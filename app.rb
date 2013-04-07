@@ -8,8 +8,8 @@ DataMapper.finalize
 
 get '/' do
   "<h1>Tempo</h1>"                 +
-  '<div data-purpose="dashboard">' +
-  "<h2>Dashboard</h2>"             +
+  '<div data-purpose="activities-list">' +
+  "<h2>Activities</h2>"             +
   make_links(activities)           +
   '</div>'
 end
