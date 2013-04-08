@@ -9,8 +9,8 @@ class FactExhibit
   def to_html
    @context.haml template, locals:  { day:         @fact.start_time.strftime( '%a %d' ),
                                       duration:    @fact.duration,
-                                      start_time:  "#{@fact.start_time.hour}:#{@fact.start_time.minute}",
-                                      end_time:    "#{@fact.end_time.hour}:#{@fact.end_time.minute}",
+                                      start_time:  formatted_start_time,
+                                      end_time:    formatted_end_time,
                                       description: break_lines( @fact.description ),
                                     }
   end
@@ -23,6 +23,14 @@ class FactExhibit
 
     def break_lines text
       text.to_s.gsub("\n",'<br />')
+    end
+
+    def formatted_start_time
+      "#{ '%02d' %  @fact.start_time.hour }:#{ '%02d' % @fact.start_time.minute }"
+    end
+
+    def formatted_end_time
+      "#{ '%02d' %  @fact.end_time.hour }:#{ '%02d' % @fact.end_time.minute }"
     end
 
 end
