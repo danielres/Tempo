@@ -1,0 +1,3 @@
+%h1 Timesheets for #{ activity.name }
+- activity_months(activity).each do |month|
+   = exhibit Timesheet.new( activity, month )

@@ -2,6 +2,6 @@
 %div{ data: { purpose: 'activities-list' } }
   %h2 Activities
   - activities.each do |activity|
-    %a{ href: "/activity/#{activity.id}"}= activity.name
+    %a{ href: activity_path( activity ) }= activity.name
 
 

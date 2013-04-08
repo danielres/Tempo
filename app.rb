@@ -12,12 +12,7 @@ get '/' do
 end
 
 get '/activity/:id' do
-  text = ""
-  text << "<h1>Timesheets for #{activity.name}</h1>"
-  activity_months(activity).each do |month|
-   text << exhibit( Timesheet.new( activity, month ) )
-  end
-  text
+  haml :activity, activity: activity
 end
 
 private
@@ -39,5 +34,13 @@ private
       when Timesheet then TimesheetExhibit.new(object)
       when Fact      then      FactExhibit.new(object)
     end.to_html
+  end
+
+  def main_page_path
+    '/'
+  end
+
+  def activity_path activity
+    "/activity/#{activity.id}"
   end
 
