@@ -8,11 +8,7 @@ DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/hamster.db")
 DataMapper.finalize
 
 get '/' do
-  "<h1>Tempo</h1>"                 +
-  '<div data-purpose="activities-list">' +
-  "<h2>Activities</h2>"             +
-  make_links(activities)           +
-  '</div>'
+  haml :home, activities: activities
 end
 
 get '/activity/:id' do
@@ -32,14 +28,6 @@ private
 
   def activities
     Activity.all
-  end
-
-  def make_links objects
-    objects.map do |o|
-      link_text = o.name
-      link_href = "/#{o.class.to_s.downcase}/#{o.id}"
-      "<a href='#{link_href}'>#{link_text}</a>"
-    end.join(' ')
   end
 
   def activity_months activity
