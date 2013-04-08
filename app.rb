@@ -12,22 +12,18 @@ get '/' do
 end
 
 get '/activity/:id' do
-  haml :activity, activity: activity
+  timesheets = activity.months.map{ |month| exhibit Timesheet.new( activity, month ) }
+  haml :activity, locals: { activity: activity, timesheets: timesheets }
 end
 
 private
 
-  def activity
-    Activity.get params[:id]
+  def activity  ; Activity.get params[:id]
   end
+  def activities; Activity.all             end
 
-  def activities
-    Activity.all
-  end
-
-  def activity_months activity
-    activity.months
-  end
+  def main_page_path        ; '/'                        end
+  def activity_path activity; "/activity/#{activity.id}" end
 
   def exhibit object
     case object
@@ -36,11 +32,4 @@ private
     end.to_html
   end
 
-  def main_page_path
-    '/'
-  end
-
-  def activity_path activity
-    "/activity/#{activity.id}"
-  end
 
