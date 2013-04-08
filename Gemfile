@@ -3,6 +3,7 @@ gem 'data_mapper'
 gem 'dm-sqlite-adapter'
 gem 'sinatra'
 gem 'haml'
+gem 'sass'
 
 group :test do
   gem 'rspec'
