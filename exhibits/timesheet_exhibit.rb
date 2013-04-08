@@ -10,7 +10,8 @@ class TimesheetExhibit
     @context.haml template, locals: { timesheet:           @timesheet,
                                       facts:               facts_html,
                                       total_hours_count:   @timesheet.total_hours_count,
-                                      total_minutes_count: @timesheet.total_minutes_count
+                                      total_minutes_count: @timesheet.total_minutes_count,
+                                      column_names:        ['day', 'minutes', 'start time', 'end time', 'description']
                                     }
   end
 
@@ -22,8 +23,6 @@ class TimesheetExhibit
 
     def facts_html
       @timesheet.facts.map{ |fact| FactExhibit.new( fact, @context, 'table_row' ).to_html }.join
-
-
     end
 
 end
