@@ -1,5 +1,23 @@
 @import "../../vendor/foundation/scss/normalize"
 @import "../../vendor/foundation/scss/foundation"
 
+=thin_titles
+  h1, h2, h3, h4, h5
+    font-family: "OpenSans", "Helvetica Neue", "Helvetica", Arial, Verdana, sans-serif
+    font-weight: 300
+
+=full_width_tables
+  table
+    width: 100%
+    th
+      width: 10%
+      &:last-child
+        width: 60%
+
++thin_titles
+
+
++full_width_tables
+
 body
   background: #eee
