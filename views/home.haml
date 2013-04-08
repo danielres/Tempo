@@ -1,5 +1,5 @@
 %h1 Tempo
-%div{ data: { purpose: 'activities-list' } }
+%div{ the('activities-list') }
   %h2 Activities
   - activities.each do |activity|
     %a{ href: activity_path( activity ) }= activity.name

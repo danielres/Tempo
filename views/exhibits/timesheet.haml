@@ -1,9 +1,12 @@
 
-%div{ data: { purpose: 'timesheet' } }
+%div{ the('timesheet') }
+
   %h2 Timesheet for #{ timesheet.year }-#{ timesheet.month }
   = facts
+
   .time_spent
-    %span{ data: { purpose: 'total_hours_count'   } }
+    %span{ the('total-hours-count') }
       #{ total_hours_count  } hours
-    %span{ data: { purpose: 'total_minutes_count' } }
+
+    %span{ the('total-minutes-count') }
       (#{ total_minutes_count} minutes)

@@ -1,0 +1,14 @@
+
+%h2 Timesheet for #{ timesheet.year }-#{ timesheet.month }
+
+%table{ the('timesheet') }
+
+  = facts
+
+  %tr.time_spent
+
+    %td{ the('total-hours-count') }
+      #{ total_hours_count  } hours
+
+    %td{ the('total-minutes-count') }
+      (#{ total_minutes_count} minutes)

@@ -43,16 +43,16 @@ steps_for :display_an_activity do
     within the 'timesheet' do
       page.should have_the 'fact', count: @expected[:fact_count]
     end
-    within all("[data-purpose=fact]")[0] do
-      page.should have_the('minutes_count', text: "#{@expected[:fact1][:minutes_count]}")
+    within all( the 'fact' )[0] do
+      page.should have_the('minutes-count', text: "#{@expected[:fact1][:minutes_count]}")
       page.should have_the('description',   text: "#{@expected[:fact1][:description]}")
     end
-    within all("[data-purpose=fact]")[1] do
-      page.should have_the('minutes_count', text: "#{@expected[:fact2][:minutes_count]}")
+    within all( the 'fact' )[1] do
+      page.should have_the('minutes-count', text: "#{@expected[:fact2][:minutes_count]}")
       page.should have_the('description',   text: "#{@expected[:fact2][:description]}")
     end
     within the 'timesheet' do
-      page.should have_the 'total_hours_count', text: "#{@expected[:total_hours_count]}"
+      page.should have_the 'total-hours-count', text: "#{@expected[:total_hours_count]}"
     end
   end
 

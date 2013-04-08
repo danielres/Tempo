@@ -1,8 +1,9 @@
 class TimesheetExhibit
 
-  def initialize timesheet, context
+  def initialize timesheet, context, format
     @timesheet = timesheet
     @context   = context
+    @format    = format
   end
 
   def to_html
@@ -16,11 +17,13 @@ class TimesheetExhibit
   private
 
     def template
-      File.read "#{@context.settings.root}/views/exhibits/timesheet.haml"
+      File.read "#{@context.settings.root}/views/exhibits/timesheet/#{@format}.haml"
     end
 
     def facts_html
-      @timesheet.facts.map{ |fact| exhibit fact }.join
+      @timesheet.facts.map{ |fact| FactExhibit.new( fact, @context, 'table_row' ).to_html }.join
+
+
     end
 
 end
