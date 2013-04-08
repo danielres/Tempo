@@ -18,8 +18,7 @@ end
 
 private
 
-  def activity  ; Activity.get params[:id]
-  end
+  def activity  ; Activity.get params[:id] end
   def activities; Activity.all             end
 
   def main_page_path        ; '/'                        end
