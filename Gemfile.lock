@@ -75,6 +75,8 @@ GEM
     guard-rspec (2.5.1)
       guard (>= 1.1)
       rspec (~> 2.11)
+    haml (4.0.1)
+      tilt
     json (1.7.7)
     json_pure (1.7.7)
     launchy (2.1.0)
@@ -136,6 +138,7 @@ DEPENDENCIES
   dm-sqlite-adapter
   guard
   guard-rspec
+  haml
   launchy
   rb-inotify
   rspec
