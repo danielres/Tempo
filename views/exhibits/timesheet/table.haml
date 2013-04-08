@@ -5,7 +5,7 @@
   %thead
     %tr
       - column_names.each do |name|
-        %th= name
+        %th{ class: name.gsub(' ','-') }= name
 
   %tbody
     = facts

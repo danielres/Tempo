@@ -44,11 +44,11 @@ steps_for :display_an_activity do
       page.should have_the 'fact', count: @expected[:fact_count]
     end
     within all( the 'fact' )[0] do
-      page.should have_the('minutes-count', text: "#{@expected[:fact1][:minutes_count]}")
+      page.should have_the('minutes',       text: "#{@expected[:fact1][:minutes_count]}")
       page.should have_the('description',   text: "#{@expected[:fact1][:description]}")
     end
     within all( the 'fact' )[1] do
-      page.should have_the('minutes-count', text: "#{@expected[:fact2][:minutes_count]}")
+      page.should have_the('minutes',       text: "#{@expected[:fact2][:minutes_count]}")
       page.should have_the('description',   text: "#{@expected[:fact2][:description]}")
     end
     within the 'timesheet' do

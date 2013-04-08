@@ -1,5 +1,9 @@
+// IMPORTS ====================================================================
+
 @import "../../vendor/foundation/scss/normalize"
 @import "../../vendor/foundation/scss/foundation"
+
+// MIXINS =====================================================================
 
 =thin_titles
   h1, h2, h3, h4, h5
@@ -14,10 +18,24 @@
       &:last-child
         width: 60%
 
+=special_table_cells
+  table
+    .numeric
+      text-align: right
+    .day,
+    .minutes,
+    .start-time,
+    .end-time
+      @extend .numeric
+    .description
+      padding-left: 2em
+
+// STYLES =====================================================================
+
 +thin_titles
-
-
 +full_width_tables
++special_table_cells
 
 body
   background: #eee
+
