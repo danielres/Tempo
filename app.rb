@@ -1,10 +1,13 @@
 require 'bundler'
 Bundler.require
-Dir['./models/*.rb'].each{ |f| require f }
-Dir['./exhibits/*.rb'].each{ |f| require f }
+Dir[ './models/*.rb'   ].each{ |f| require f }
+Dir[ './exhibits/*.rb' ].each{ |f| require f }
+Dir[ './engines/*.rb'  ].each{ |f| require f }
 
 DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/hamster.db")
 DataMapper.finalize
+
+use SassEngine
 
 helpers do
   def the name
@@ -15,6 +18,9 @@ helpers do
       when Timesheet then TimesheetExhibit.new( object, self, options[:format] )
       when Fact      then      FactExhibit.new( object, self, options[:format] )
     end.to_html
+  end
+  def stylesheet_link name
+    haml "%link{ rel: 'stylesheet', type: 'text/css', href: 'stylesheets/#{name}.css' }"
   end
 end
 
