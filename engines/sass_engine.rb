@@ -5,7 +5,11 @@ class SassEngine < Sinatra::Base
 
   get '/stylesheets/*.css' do
     filename = params[:splat].first
-    sass filename.to_sym
+    begin
+      sass filename.to_sym
+    rescue
+      scss filename.to_sym
+    end
   end
 
 end
