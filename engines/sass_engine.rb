@@ -1,3 +1,4 @@
+
 class SassEngine < Sinatra::Base
 
   set :views, File.dirname(__FILE__)    + '/../assets/sass'

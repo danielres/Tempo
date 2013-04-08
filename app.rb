@@ -20,12 +20,12 @@ helpers do
     end.to_html
   end
   def stylesheet_link name
-    haml "%link{ rel: 'stylesheet', type: 'text/css', href: 'stylesheets/#{name}.css' }"
+    haml "%link{ rel: 'stylesheet', type: 'text/css', href: '/stylesheets/#{name}.css' }"
   end
 end
 
 get '/' do
-  haml :home, locals: { activities: activities }, layout: true
+  haml :home, locals: { activities: activities }
 end
 
 get '/activity/:id' do
