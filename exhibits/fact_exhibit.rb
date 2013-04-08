@@ -1,6 +1,7 @@
 class FactExhibit
-  def initialize fact
+  def initialize fact, context
     @fact = fact
+    @context = context
   end
   def to_html
     html = ''

@@ -26,8 +26,8 @@ private
 
   def exhibit object
     case object
-      when Timesheet then TimesheetExhibit.new(object)
-      when Fact      then      FactExhibit.new(object)
+      when Timesheet then TimesheetExhibit.new(object, self)
+      when Fact      then      FactExhibit.new(object, self)
     end.to_html
   end
 
