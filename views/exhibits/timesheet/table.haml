@@ -2,13 +2,19 @@
 %h2 Timesheet for #{ timesheet.year }-#{ timesheet.month }
 
 %table{ the('timesheet') }
+  %thead
+    %tr
+      - column_names.each do |name|
+        %th= name
 
-  = facts
+  %tbody
+    = facts
 
-  %tr.time_spent
+  %tfoot
+    %tr.time_spent
 
-    %td{ the('total-hours-count') }
-      #{ total_hours_count  } hours
+      %td{ the('total-hours-count') }
+        #{ total_hours_count  } hours
 
-    %td{ the('total-minutes-count') }
-      (#{ total_minutes_count} minutes)
+      %td{ the('total-minutes-count') }
+        (#{ total_minutes_count} minutes)
