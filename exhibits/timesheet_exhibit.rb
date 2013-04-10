@@ -11,11 +11,16 @@ class TimesheetExhibit
                                       facts:               facts_html,
                                       total_hours_count:   @timesheet.total_hours_count,
                                       total_minutes_count: @timesheet.total_minutes_count,
-                                      column_names:        ['day', 'minutes', 'start time', 'end time', 'description']
+                                      column_names:        ['day', 'minutes', 'start time', 'end time', 'description'],
+                                      timesheet_title:     timesheet_title,
                                     }
   end
 
   private
+
+    def timesheet_title
+      "Timesheet for #{ @timesheet.year }-#{ "%02d" % @timesheet.month }"
+    end
 
     def template
       File.read "#{@context.settings.root}/views/exhibits/timesheet/#{@format}.haml"
