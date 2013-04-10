@@ -30,7 +30,10 @@ end
 
 get '/activity/:id' do
   timesheets = activity.months.map{ |month| exhibit( Timesheet.new( activity, month ), format: 'table') }
-  haml :activity, locals: { activity: activity, timesheets: timesheets }, layout: :page_layout
+  haml :activity, locals: { activity: activity,
+                            timesheets: timesheets,
+                            page_title: "Timesheets for #{ activity.name.capitalize }",
+                          }, layout: :page_layout
 end
 
 private
