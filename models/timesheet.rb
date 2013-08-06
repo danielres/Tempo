@@ -28,4 +28,8 @@ class Timesheet
     @month.year
   end
 
+  def activity
+    @activity
+  end
+
 end

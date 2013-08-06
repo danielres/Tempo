@@ -19,7 +19,7 @@ class TimesheetExhibit
   private
 
     def timesheet_title
-      "Timesheet for #{ @timesheet.year }-#{ "%02d" % @timesheet.month }"
+      "Timesheet for #{ @timesheet.year }-#{ "%02d" % @timesheet.month } (#{@timesheet.activity.name.capitalize})"
     end
 
     def template
