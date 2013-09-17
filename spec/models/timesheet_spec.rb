@@ -1,19 +1,23 @@
-require_relative '../spec_helper'
-require_relative '../../models/timesheet'
+require 'spec_helper'
+require 'timesheet'
 
 describe Timesheet do
 
-  describe '#new' do
-    before { stub_const 'Activity', DummyModel }
-    let( :timesheet ){ Timesheet.new activity, month }
-    let( :activity  ){ Activity.new }
-    let( :month     ){ DateTime.new 2013,01 }
-    it "creates a new timesheet given an activity and a month" do
-      Timesheet.new activity, month
+  describe 'new timesheet' do
+    context 'for a given activity and month' do
+      let( :activity  ){ double 'activity' }
+      let( :month     ){ DateTime.new 2013, 01 }
+      let( :timesheet     ){ Timesheet.new activity, month }
+      it 'has its activity correctly set' do
+        expect( timesheet.activity ).to be activity
+      end
+      it 'has its month correctly set' do
+        expect( timesheet.month ).to be 1
+      end
     end
   end
 
-  describe 'with facts' do
+  describe 'having facts' do
     before { stub_const 'Activity', DummyModel }
     before { stub_const 'Fact',     DummyModel }
     let( :activity_with_facts  ){ a=Activity.new.tap{ |a| a.stub facts: facts } }
