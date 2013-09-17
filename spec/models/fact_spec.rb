@@ -14,8 +14,7 @@ describe Fact do
   end
 
   describe '#activity' do
-    before { stub_const 'Activity', DummyModel }
-    let( :activity ){ Activity.new }
+    let( :activity ){ double.as_null_object }
     let( :fact ){ Fact.new.tap{ |f| f.activity = activity } }
     it "belongs to an activity" do
       fact.activity.should == activity

@@ -14,8 +14,7 @@ describe Activity do
   end
 
   describe '#category' do
-    before { stub_const 'Category', DummyModel }
-    let( :category ){ Category.new }
+    let( :category ){ double.as_null_object }
     let( :activity ){ Activity.new.tap{ |a| a.category = category } }
     it "belongs to a category" do
       activity.category.should == category
@@ -23,28 +22,24 @@ describe Activity do
   end
 
   describe '#facts' do
-    before { stub_const 'Fact', DummyModel }
-    let( :fact1               ){ Fact.new }
-    let( :fact2               ){ Fact.new }
+    let( :fact1               ){ double(:fact1).as_null_object }
+    let( :fact2               ){ double(:fact2).as_null_object }
     let( :facts               ){ [ fact1, fact2 ] }
     let( :activity_with_facts ){ Activity.new.tap{ |a| a.facts = facts } }
     it "has many facts" do
-      facts.count.times do |i|
-        activity_with_facts.facts.sort[i].should equal facts.sort[i]
-      end
+      expect( activity_with_facts.facts ).to match_array facts
     end
   end
 
   describe '#months' do
-    before { stub_const 'Fact', DummyModel }
     it "returns a list of months when the activity occurs" do
       month1  = DateTime.new( 2012, 1 )
       month2  = DateTime.new( 2013, 1 )
       month3  = DateTime.new( 2013, 2 )
-      ( fact1 = Fact.new ).stub start_time: month1
-      ( fact2 = Fact.new ).stub start_time: month2
-      ( fact3 = Fact.new ).stub start_time: month2
-      ( fact4 = Fact.new ).stub start_time: month3
+      ( fact1 = double.as_null_object ).stub start_time: month1
+      ( fact2 = double.as_null_object ).stub start_time: month2
+      ( fact3 = double.as_null_object ).stub start_time: month2
+      ( fact4 = double.as_null_object ).stub start_time: month3
       facts   = [ fact1, fact2, fact3, fact4 ]
       activity_with_facts = activity.tap{ |c| c.facts = facts }
       activity_with_facts.months.should =~ [ month1, month2, month3 ]

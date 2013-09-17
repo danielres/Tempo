@@ -14,15 +14,12 @@ describe Category do
   end
 
   describe '#activities' do
-    before { stub_const 'Activity', DummyModel }
-    let( :activity1  ){ Activity.new }
-    let( :activity2  ){ Activity.new }
+    let( :activity1  ){ double.as_null_object }
+    let( :activity2  ){ double.as_null_object }
     let( :activities ){ [ activity1, activity2 ] }
     let( :category_with_activities ){ Category.new.tap{ |c| c.activities = activities } }
     it "has many activities" do
-      activities.count.times do |i|
-        category_with_activities.activities.sort[i].should equal activities.sort[i]
-      end
+      expect( category_with_activities.activities ).to match_array activities
     end
   end
 
