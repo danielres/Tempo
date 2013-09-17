@@ -1,16 +1,13 @@
-require_relative '../spec_helper'
-require_relative '../../models/tag'
+require 'spec_helper'
+require 'tag'
 
 
 describe Tag do
 
-  let( :tag ) { Tag.new }
-
-  describe '#new' do
-    it "has proper attributes" do
-      attributes  = %w( id name )
-      attributes.each{ |attribute| tag.should respond_to attribute }
-    end
+  describe 'new tag' do
+    let( :tag ) { Tag.new }
+    it( "supports attribute 'id'"   ){ expect( tag ).to respond_to :id   }
+    it( "supports attribute 'name'" ){ expect( tag ).to respond_to :name }
   end
 
 end
