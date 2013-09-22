@@ -8,6 +8,7 @@ class Timesheet
     @activity.facts
              .select{ |f| f.start_time.year  == @month.year  }
              .select{ |f| f.start_time.month == @month.month }
+             .sort_by(&:start_time)
   end
 
   def total_minutes_count

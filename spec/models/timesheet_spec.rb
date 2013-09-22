@@ -36,6 +36,12 @@ describe Timesheet do
       it "considers only the facts that happened during the given month" do
         expect( timesheet.facts ).to match_array [ fact1, fact2 ]
       end
+      context 'when facts are entered afterwards' do
+        let( :facts ){ [ fact2, fact1 ] }
+        it "orders the facts cronologically" do
+          expect( timesheet.facts ).to eq [ fact1, fact2 ]
+        end
+      end
 
       describe 'displaying the total time spent' do
         describe 'as minutes' do
