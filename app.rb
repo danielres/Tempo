@@ -1,8 +1,17 @@
 require 'bundler'
 Bundler.require
-Dir[ './models/*.rb'   ].each{ |f| require f }
-Dir[ './exhibits/*.rb' ].each{ |f| require f }
-Dir[ './engines/*.rb'  ].each{ |f| require f }
+
+$: << 'models' << 'exhibits' << 'engines'
+
+require 'activity'
+require 'category'
+require 'fact'
+require 'tag'
+require 'timesheet'
+require 'fact_exhibit'
+require 'timesheet_exhibit'
+require 'sass_engine'
+
 
 DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/hamster.db")
 DataMapper.finalize
@@ -24,22 +33,30 @@ helpers do
   end
 end
 
+
 get '/' do
+  activities = Activity.all
   haml :home, locals: { activities: activities }, layout: :page_layout
 end
 
 get '/activity/:id' do
-  timesheets = activity.months.map{ |month| exhibit( Timesheet.new( activity, month ), format: 'table') }
-  haml :activity, locals: { activity: activity,
+  activity   = Activity.get params[:id]
+  timesheets = timesheets_for_activity activity
+  timesheets = timesheets.map{ |timesheet| exhibit timesheet, format: 'table' }
+  haml :activity, locals: { activity:   activity,
                             timesheets: timesheets,
                             page_title: "Timesheets for #{ activity.name.capitalize }",
-                          }, layout: :page_layout
+                          },
+                          layout: :page_layout
 end
 
 private
 
-  def activity  ; Activity.get params[:id] end
-  def activities; Activity.all             end
+  def timesheets_for_activity activity
+    months      = activity.months
+    timesheets  = months.map{ |month| Timesheet.new activity, month }
+  end
+
 
   def main_page_path        ; '/'                        end
   def activity_path activity; "/activity/#{activity.id}" end
