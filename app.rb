@@ -1,7 +1,7 @@
 require 'bundler'
 Bundler.require
 
-$: << 'models' << 'exhibits' << 'engines'
+$: << 'models' << 'exhibits' << 'engines' << 'helpers'
 
 require 'activity'
 require 'category'
@@ -10,7 +10,7 @@ require 'tag'
 require 'fact_exhibit'
 require 'timesheet_exhibit'
 require 'sass_engine'
-require_relative './helpers'
+require 'application_helpers'
 
 
 DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/hamster.db")
@@ -18,7 +18,7 @@ DataMapper.finalize
 
 use SassEngine
 
-helpers Helpers
+helpers ApplicationHelpers
 
 get '/' do
   activities = Activity.all
