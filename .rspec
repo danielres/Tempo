@@ -1,1 +1,1 @@
---color --format doc -r turnip/rspec -I models
+--color --format doc -r turnip/rspec -I models -I exhibits
