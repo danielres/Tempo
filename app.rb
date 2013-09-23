@@ -7,10 +7,10 @@ require 'activity'
 require 'category'
 require 'fact'
 require 'tag'
-require 'timesheet'
 require 'fact_exhibit'
 require 'timesheet_exhibit'
 require 'sass_engine'
+require_relative './helpers'
 
 
 DataMapper.setup(:default, "sqlite://#{Dir.pwd}/db/hamster.db")
@@ -18,21 +18,7 @@ DataMapper.finalize
 
 use SassEngine
 
-helpers do
-  def the name
-    { data: { purpose: name } }
-  end
-  def exhibit object, options={}
-    case object
-      when Timesheet then TimesheetExhibit.new( object, self, options[:format] )
-      when Fact      then      FactExhibit.new( object, self, options[:format] )
-    end.to_html
-  end
-  def stylesheet_link name
-    haml "%link{ rel: 'stylesheet', type: 'text/css', href: '/stylesheets/#{name}.css' }"
-  end
-end
-
+helpers Helpers
 
 get '/' do
   activities = Activity.all
@@ -41,7 +27,7 @@ end
 
 get '/activity/:id' do
   activity   = Activity.get params[:id]
-  timesheets = timesheets_for_activity activity
+  timesheets = timesheets_from_activity activity
   timesheets = timesheets.map{ |timesheet| exhibit timesheet, format: 'table' }
   haml :activity, locals: { activity:   activity,
                             timesheets: timesheets,
@@ -51,11 +37,6 @@ get '/activity/:id' do
 end
 
 private
-
-  def timesheets_for_activity activity
-    months      = activity.months
-    timesheets  = months.map{ |month| Timesheet.new activity, month }
-  end
 
 
   def main_page_path        ; '/'                        end
