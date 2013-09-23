@@ -9,9 +9,11 @@ module ApplicationHelpers
     { data: { purpose: name } }
   end
   def exhibit object, options={}
+    context = options[:context] || self
+    format  = options.fetch( :format )
     case object
-      when Timesheet then TimesheetExhibit.new( object, self, options[:format] )
-      when Fact      then      FactExhibit.new( object, self, options[:format] )
+      when Timesheet then TimesheetExhibit.new( object, context, format )
+      when Fact      then      FactExhibit.new( object, context, format )
     end.to_html
   end
   def stylesheet_link name

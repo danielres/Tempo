@@ -3,7 +3,7 @@ class TimesheetExhibit
   def initialize timesheet, context, format
     @timesheet = timesheet
     @context   = context
-    @format    = format
+    @format    = format.to_s || 'default'
   end
 
   def to_html
@@ -23,11 +23,18 @@ class TimesheetExhibit
     end
 
     def template
-      File.read "#{@context.settings.root}/views/exhibits/timesheet/#{@format}.haml"
+      File.read "#{@context.settings.root}/views/exhibits/timesheet/#{format}.haml"
     end
 
     def facts_html
       @timesheet.facts.map{ |fact| FactExhibit.new( fact, @context, 'table_row' ).to_html }.join
+    end
+
+    def format
+      case @format
+      when 'default' then 'table'
+      else @format
+      end
     end
 
 end
