@@ -5,7 +5,7 @@ describe TimesheetExhibit do
     let( :context   ){ double 'context'   }
     let( :format    ){ 'format'           }
     it 'returns a TimesheetExhibit object' do
-      expect( TimesheetExhibit.new( timesheet, context, 'format' ) ).to be_kind_of TimesheetExhibit
+      expect( TimesheetExhibit.new timesheet, context, format ).to be_kind_of TimesheetExhibit
     end
   end
 end
