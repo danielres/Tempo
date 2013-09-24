@@ -1,16 +1,17 @@
-class TimesheetExhibit
+require 'base_exhibit'
 
-  def initialize timesheet, context, format
-    @timesheet = timesheet
-    @context   = context
-    @format    = format.to_s || 'default'
+class TimesheetExhibit < BaseExhibit
+
+  def initialize *args
+    super
+    @default_format = 'table'
   end
 
   def to_html
-    @context.haml template, locals: { timesheet:           @timesheet,
+    @context.haml template, locals: { timesheet:           @model,
                                       facts:               facts_html,
-                                      total_hours_count:   @timesheet.total_hours_count,
-                                      total_minutes_count: @timesheet.total_minutes_count,
+                                      total_hours_count:   @model.total_hours_count,
+                                      total_minutes_count: @model.total_minutes_count,
                                       column_names:        [ 'day', 'description', 'start time', 'end time', 'minutes' ],
                                       timesheet_title:     timesheet_title,
                                     }
@@ -19,22 +20,11 @@ class TimesheetExhibit
   private
 
     def timesheet_title
-      "Timesheet for #{ @timesheet.year }-#{ "%02d" % @timesheet.month } (#{@timesheet.activity.name.capitalize})"
-    end
-
-    def template
-      File.read "#{@context.settings.root}/views/exhibits/timesheet/#{format}.haml"
+      "Timesheet for #{ @model.year }-#{ "%02d" % @model.month } (#{@model.activity.name.capitalize})"
     end
 
     def facts_html
-      @timesheet.facts.map{ |fact| FactExhibit.new( fact, @context, 'table_row' ).to_html }.join
-    end
-
-    def format
-      case @format
-      when 'default' then 'table'
-      else @format
-      end
+      @model.facts.map{ |fact| FactExhibit.new( fact, @context, 'table_row' ).to_html }.join
     end
 
 end
