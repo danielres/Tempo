@@ -3,7 +3,7 @@ class FactExhibit
   def initialize fact, context, format
     @fact    = fact
     @context = context
-    @format  = format
+    @format  = format.to_s || 'default'
   end
 
   def to_html
@@ -18,7 +18,7 @@ class FactExhibit
   private
 
     def template
-      File.read "#{@context.settings.root}/views/exhibits/fact/#{@format}.haml"
+      File.read "#{@context.settings.root}/views/exhibits/fact/#{format}.haml"
     end
 
     def break_lines text
@@ -32,5 +32,13 @@ class FactExhibit
     def formatted_end_time
       "#{ '%02d' %  @fact.end_time.hour }:#{ '%02d' % @fact.end_time.minute }"
     end
+
+    def format
+      case @format
+      when 'default' then 'table_row'
+      else @format
+      end
+    end
+
 
 end
