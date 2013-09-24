@@ -10,8 +10,8 @@ class FactExhibit < BaseExhibit
   def to_html
    @context.haml template, locals:  { day:         @model.start_time.strftime( '%a %d' ),
                                       duration:    @model.duration,
-                                      start_time:  formatted_start_time,
-                                      end_time:    formatted_end_time,
+                                      start_time:  format_time( @model.start_time  ),
+                                      end_time:    format_time( @model.end_time    ),
                                       description: break_lines( @model.description ),
                                     }
   end
@@ -22,12 +22,8 @@ class FactExhibit < BaseExhibit
       text.to_s.gsub("\n",'<br />')
     end
 
-    def formatted_start_time
-      "#{ '%02d' %  @model.start_time.hour }:#{ '%02d' % @model.start_time.minute }"
-    end
-
-    def formatted_end_time
-      "#{ '%02d' %  @model.end_time.hour   }:#{ '%02d' % @model.end_time.minute   }"
+    def format_time time
+      "#{ '%02d' %  time.hour }:#{ '%02d' % time.minute }"
     end
 
 end
