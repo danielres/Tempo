@@ -21,7 +21,7 @@ use SassEngine
 helpers ApplicationHelpers
 
 get '/' do
-  activities = Activity.all
+  activities = Activity.all( order: [ :name ] )
   haml :home, locals: { activities: activities }, layout: :page_layout
 end
 
