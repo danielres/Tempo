@@ -3,7 +3,7 @@ require 'timesheet'
 module ApplicationHelpers
 
   def timesheets_from_activity activity
-    activity.months.map{ |month| Timesheet.new activity, month }
+    activity.months.reverse.map{ |month| Timesheet.new activity, month }
   end
   def the name
     { data: { purpose: name } }
