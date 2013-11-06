@@ -14,3 +14,8 @@ group :test do
   gem 'capybara'
   gem 'launchy'
 end
+
+group :development do
+  gem 'shotgun'
+end
+
