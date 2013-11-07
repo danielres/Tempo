@@ -2,6 +2,9 @@ require 'timesheet'
 
 module ApplicationHelpers
 
+  def main_page_path        ; '/'                        end
+  def activity_path activity; "/activity/#{activity.id}" end
+
   def timesheets_from_activity activity
     activity.months.reverse.map{ |month| Timesheet.new activity, month }
   end
