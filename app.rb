@@ -1,7 +1,10 @@
 require 'bundler'
 Bundler.require
 
-$: << 'models' << 'exhibits' << 'engines' << 'helpers'
+$: << File.expand_path( '../models'  , __FILE__ )
+$: << File.expand_path( '../exhibits', __FILE__ )
+$: << File.expand_path( '../engines' , __FILE__ )
+$: << File.expand_path( '../helpers' , __FILE__ )
 
 require 'activity'
 require 'category'
